@@ -20,7 +20,8 @@ session = DBSession()
 @app.route("/catalog")
 def homePage():
 	category = session.query(Category).all()
-	return render_template('homePage.html',category=category)
+	items = session.query(Items).all()
+	return render_template('homePage.html',category=category,items=items)
 
 
 @app.route("/catalog/<string:category>/items")

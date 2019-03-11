@@ -18,7 +18,8 @@ DBSession = sessionmaker(bind=engine)
 # session.rollback()
 session = DBSession()
 
-Category.session.delete()
+session.query(Category).delete()
+session.commit()
 
 #Menu for UrbanBurger
 category1 = Category(name = "Football")
@@ -29,4 +30,16 @@ session.commit()
 category2 = Category(name = "Hockey")
 
 session.add(category2)
+session.commit()
+
+
+Item1 = Items(title='ball',Description='something about the ball',category=category1)
+
+session.add(Item1)
+session.commit()
+
+
+Item2 = Items(title='Shoe',Description='something about the shoe',category=category1)
+
+session.add(Item2)
 session.commit()
