@@ -34,6 +34,11 @@ def itemDetails(category,item):
 	return "items descirption"
 
 
+@app.route("/catalog/add/items")
+def addItem():
+	return render_template('newItem.html')
+
+
 if __name__ == '__main__':
 	app.debug = True
 	app.run(host='0.0.0.0',port=5000)

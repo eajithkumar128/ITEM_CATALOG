@@ -5,6 +5,7 @@
 </head>
 <body>
 	<div>
+		<h2><a href="{{ url_for('addItem') }}">ADD ITEM</a></h2>
 		<h1>CATEGORIES</h1>
 		{% for category in category %}
 			<h3>{{ category.name }}</h3>
