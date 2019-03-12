@@ -8,7 +8,7 @@
 		<h2><a href="{{ url_for('addItem') }}">ADD ITEM</a></h2>
 		<h1>CATEGORIES</h1>
 		{% for category in category %}
-			<h3>{{ category.name }}</h3>
+			<h3><a href="{{url_for('catalogItems',category=category.name)}}">{{ category.name }} </a></h3>
 		{% endfor %}
 	</div>
 	<div>

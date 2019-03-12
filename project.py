@@ -30,7 +30,13 @@ def homePage():
 
 @app.route("/catalog/<string:category>/items")
 def catalogItems(category):
-	return "specific items catalog"
+	categoryItems = session.query(Items).filter_by(
+							Category_name=category).all()
+	category = session.query(Category).all()
+	print(categoryItems)
+	return render_template('categoryItem.html',
+								category=category,
+								categoryItems=categoryItems)
 
 
 @app.route("/catalog/<string:category>/<string:item>/")

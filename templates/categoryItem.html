@@ -1,0 +1,21 @@
+<!DOCTYPE html>
+<html lang="en" dir="ltr">
+  <head>
+    <meta charset="utf-8">
+    <title>CATEGORY ITEM</title>
+  </head>
+  <body>
+    <div>
+      <h1>CATEGORIES</h1>
+      {% for category in category %}
+        <h3><a href="{{url_for('catalogItems',category=category.name)}}">{{ category.name }} </a></h3>
+      {% endfor %}
+    </div>
+    <div>
+      <h1>{{category.name}} ITEMS</h1>
+      {% for item in categoryItems %}
+        <h3><a href="#">{{ item.title }} </a></h3>
+      {% endfor %}
+    </div>
+  </body>
+</html>
