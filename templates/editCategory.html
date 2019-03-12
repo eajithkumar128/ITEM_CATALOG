@@ -1,0 +1,13 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<title>EDIT CATEGORY</title>
+</head>
+<body>
+	<h1>EDIT CATEGORY</h1>
+	<form action="{{url_for('editCategory',editcategory=category.id)}}" method="POST">
+		<input type="text" value="{{category.name}}" name="name" id="name" minlength="3">
+		<button type="submit">EDIT</button>
+	</form>
+</body>
+</html>

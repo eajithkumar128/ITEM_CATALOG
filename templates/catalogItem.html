@@ -12,10 +12,14 @@
       {% endfor %}
     </div>
     <div>
-      <h1>{{category.name}} ITEMS</h1>
-      {% for item in categoryItems %}
-        <h3><a href="#">{{ item.title }} </a></h3>
-      {% endfor %}
+      <h1> {{Category_name.name}} ITEMS</h1>
+      {% if categoryItems %}
+        {% for item in categoryItems %}
+          <h3><a href="{{url_for('itemDetails',category=item.Category_name,item=item.id)}}">{{ item.title }} </a></h3>
+        {% endfor %}
+      {% else %}
+          <h3>No items in this category</h3>
+      {% endif %}
     </div>
   </body>
 </html>

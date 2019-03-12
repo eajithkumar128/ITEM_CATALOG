@@ -1,0 +1,34 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<title>NEW ITEM</title>
+</head>
+<body>
+	<div>
+		<h1>EDIT DETAILS FOR THE ITEM</h1>
+		<form action="{{ url_for('editItem',category=item.Category_name,item_id=item.id) }}" method="POST">
+			<div class="form-group">
+				<label for="Title">Title:</label>
+				<input type ="text" class="form-control" maxlength="100" name="name" value={{item.title}}>
+				<br><br>
+				<label for="Description">Description:</label>
+				<textarea name="Description" id="descirption">{{ item.Description }}</textarea>
+				<br><br>
+				<label for="category">Category:</label>
+				<select name="category_name">
+					{% for category in category %}
+						{% if category.name == item.Category_name%}
+							<option selected value="{{category.name}}">{{category.name}}</option>
+						{% else %}
+							<option value="{{category.name}}">{{category.name}}</option>
+						{% endif %}
+						}
+					{% endfor %}
+				</select>
+				<br><br>
+				<button type="submit">Edit Details</button>
+			</div>
+		</form>
+	</div>
+</body>
+</html>

@@ -1,0 +1,11 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<title>ITEM DETAILS</title>
+</head>
+<body>
+	<h1>{{itemDetail.title}}</h1>
+	<p>{{itemDetail.Description}}</p>
+	<a href="{{url_for('editItem',category=itemDetail.Category_name,item_id=itemDetail.id)}}">EDIT</a> | <a href="{{url_for('deleteItem',category=itemDetail.Category_name,item_id=itemDetail.id)}}">DELETE</a>
+</body>
+</html>

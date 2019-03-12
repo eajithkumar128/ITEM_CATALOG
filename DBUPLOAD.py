@@ -8,7 +8,7 @@ import datetime
 
 currentDT = datetime.datetime.now()
 
-engine = create_engine('sqlite:///itemcatalogdb.db')
+engine = create_engine('sqlite:///itemcatalogdbs.db')
 # Bind the engine to the metadata of the Base class so that the
 # declaratives can be accessed through a DBSession instance
 Base.metadata.bind = engine
@@ -38,13 +38,13 @@ session.add(category2)
 session.commit()
 
 
-Item1 = Items(title='ball',Description='something about the ball',Category_name="Football",upload_date=datetime.datetime.now())
+Item1 = Items(id=1,title='ball',Description='something about the ball',Category_name="Football",upload_date=datetime.datetime.now())
 
 session.add(Item1)
 session.commit()
 
 
-Item2 = Items(title='Shoe',Description='something about the shoe',Category_name="Hockey",upload_date=datetime.datetime.now())
+Item2 = Items(id=2,title='Shoe',Description='something about the shoe',Category_name="Hockey",upload_date=datetime.datetime.now())
 
 session.add(Item2)
 session.commit()
