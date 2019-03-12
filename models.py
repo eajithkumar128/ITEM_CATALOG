@@ -1,6 +1,6 @@
 import os
 import sys
-from sqlalchemy import Column, ForeignKey, String, Integer
+from sqlalchemy import Column, ForeignKey, String, Integer, DateTime
 from sqlalchemy.ext.declarative import declarative_base
 from sqlalchemy.orm import relationship
 from sqlalchemy import create_engine
@@ -22,11 +22,11 @@ class Items(Base):
 	id = Column(Integer,primary_key=True)
 	title = Column(String(30),nullable=False)
 	Description = Column(String(250))
-	Category_id = Column(Integer, ForeignKey('category.id'))
-	category = relationship(Category)
+	Category_name = Column(String(30),nullable=False)
+	upload_date = Column(DateTime,nullable=False)
 
 
-engine = create_engine('sqlite:///itemcatalog.db')
+engine = create_engine('sqlite:///itemcatalogdb.db')
 
 
 Base.metadata.create_all(engine)
