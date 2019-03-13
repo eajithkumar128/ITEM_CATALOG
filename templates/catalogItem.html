@@ -8,14 +8,14 @@
     <div>
       <h1>CATEGORIES</h1>
       {% for category in category %}
-        <h3><a href="{{url_for('catalogItems',category=category.name)}}">{{ category.name }} </a></h3>
+        <h3><a href="{{url_for('catalogItems',category_id=category.id)}}">{{ category.name }} </a></h3>
       {% endfor %}
     </div>
     <div>
       <h1> {{Category_name.name}} ITEMS</h1>
       {% if categoryItems %}
         {% for item in categoryItems %}
-          <h3><a href="{{url_for('itemDetails',category=item.Category_name,item=item.id)}}">{{ item.title }} </a></h3>
+          <h3><a href="{{url_for('itemDetails',category_id=item.category_id,item=item.id)}}">{{ item.title }} </a></h3>
         {% endfor %}
       {% else %}
           <h3>No items in this category</h3>

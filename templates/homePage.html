@@ -9,7 +9,7 @@
 		<h2><a href="{{ url_for('addItem') }}">ADD ITEM</a></h2>
 		<h1>CATEGORIES</h1>
 		{% for category in category %}
-			<h3><a href="{{url_for('catalogItems',category=category.name)}}">{{ category.name }} </a>
+			<h3><a href="{{url_for('catalogItems',category_id=category.id)}}">{{ category.name }} </a>
 			</h3>
 			<a href="{{url_for('editCategory',category_id=category.id)}}">EDIT</a>
 			<a href="{{url_for('deleteCategory',category_id=category.id)}}">DELETE</a>
@@ -18,7 +18,7 @@
 	<div>
 		<h1>LATEST ITEMS</h1>
 		{% for item in items %}
-			<h3><a href="{{url_for('itemDetails',category=item.Category_name,item=item.id)}}">{{ item.title }}  ({{ item.Category_name }})</a></h3>
+			<h3><a href="{{url_for('itemDetails',category_id=item.category_id,item=item.id)}}">{{ item.title }}  </a></h3>
 		{% endfor %}
 	</div>
 </body>

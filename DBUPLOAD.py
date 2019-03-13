@@ -1,14 +1,14 @@
 from sqlalchemy import create_engine
 from sqlalchemy.orm import sessionmaker
 
-from models import Category, Base, Items
+from modelsNew import Category, Base, Items
 
 import datetime
 
 
 currentDT = datetime.datetime.now()
 
-engine = create_engine('sqlite:///itemcatalogdbs.db')
+engine = create_engine('sqlite:///itemcategory.db')
 # Bind the engine to the metadata of the Base class so that the
 # declaratives can be accessed through a DBSession instance
 Base.metadata.bind = engine
@@ -32,19 +32,43 @@ category1 = Category(name = "Football")
 session.add(category1)
 session.commit()
 
+Item1 = Items(title='ball',Description='this is a ball',
+					upload_date=currentDT,category=category1)
+
+session.add(Item1)
+session.commit()
+
+Item2 = Items(title='shoe',Description='this is a ball',
+					upload_date=currentDT,category=category1)
+
+session.add(Item2)
+session.commit()
+
 category2 = Category(name = "Hockey")
 
 session.add(category2)
 session.commit()
 
+Item3 = Items(title='ball',Description='this is a ball',
+					upload_date=currentDT,category=category2)
 
-Item1 = Items(id=1,title='ball',Description='something about the ball',Category_name="Football",upload_date=datetime.datetime.now())
-
-session.add(Item1)
+session.add(Item3)
 session.commit()
 
+Item4 = Items(title='shoe',Description='this is a ball',
+					upload_date=currentDT,category=category2)
 
-Item2 = Items(id=2,title='Shoe',Description='something about the shoe',Category_name="Hockey",upload_date=datetime.datetime.now())
-
-session.add(Item2)
+session.add(Item4)
 session.commit()
+# Item1 = Items(title='ball',Description='something about the ball',
+# 					upload_date=datetime.datetime.now(),category=category1)
+
+# session.add(Item1)
+# session.commit()
+
+
+# Item2 = Items=2,title='Shoe',Description='something about the shoe',
+# 					upload_date=datetime.datetime.now(),category=category2)
+
+# session.add(Item2)
+# session.commit()
