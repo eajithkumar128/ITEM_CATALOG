@@ -12,7 +12,7 @@
 			<h3><a href="{{url_for('catalogItems',category=category.name)}}">{{ category.name }} </a>
 			</h3>
 			<a href="{{url_for('editCategory',category_id=category.id)}}">EDIT</a>
-			<a href="#">DELETE</a>
+			<a href="{{url_for('deleteCategory',category_id=category.id)}}">DELETE</a>
 		{% endfor %}
 	</div>
 	<div>

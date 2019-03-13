@@ -52,9 +52,9 @@ def addCategory():
 		return render_template('newCategory.html')
 
 
-@app.route("/catalog/<int:category_id>/edit",methods=['GET','POST'])
-def editCategory(editcategory):
-	editedCategory = session.query(Category).filter_by(name=editcategory).one()
+@app.route("/catalog/<int:category_id>/edit/",methods=['GET','POST'])
+def editCategory(category_id):
+	editedCategory = session.query(Category).filter_by(id=category_id).one()
 	if request.method == 'POST':
 	    if request.form['name']:
 	    	editedCategory.name = request.form['name']
@@ -63,6 +63,21 @@ def editCategory(editcategory):
 	    return redirect(url_for('homePage'))
 	else:
 		return render_template('editCategory.html',category=editedCategory)
+
+
+@app.route("/catalog/<int:category_id>/delete/",methods=['GET','POST'])
+def deleteCategory(category_id):
+	deleteCategory = session.query(Category).filter_by(id=category_id).one()
+	items = session.query(Items).filter_by(
+						Category_name=deleteCategory.name).all()
+	if request.method == 'POST':
+		session.delete(deleteCategory)
+		for item in items:
+			session.delete(item)
+		session.commit()
+		return redirect(url_for('homePage'))
+	else:
+		return render_template('deleteCategory.html',category=deleteCategory)
 
 
 @app.route("/catalog/<string:category>/<int:item>/")
