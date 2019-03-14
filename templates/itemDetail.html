@@ -1,11 +1,7 @@
-<!DOCTYPE html>
-<html>
-<head>
-	<title>ITEM DETAILS</title>
-</head>
-<body>
+{% extends "main.html" %}
+{% block content %}
+{% include "header.html" %}
 	<h1>{{itemDetail.title}}</h1>
 	<p>{{itemDetail.Description}}</p>
 	<a href="{{url_for('editItem',category_id=itemDetail.category_id,item_id=itemDetail.id)}}">EDIT</a> | <a href="{{url_for('deleteItem',category_id=itemDetail.category_id,item_id=itemDetail.id)}}">DELETE</a>
-</body>
-</html>
+{% endblock %}

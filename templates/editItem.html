@@ -1,9 +1,6 @@
-<!DOCTYPE html>
-<html>
-<head>
-	<title>NEW ITEM</title>
-</head>
-<body>
+{% extends "main.html" %}
+{% block content %}
+{% include "header.html" %}
 	<div>
 		<h1>EDIT DETAILS FOR THE ITEM</h1>
 		<form action="{{ url_for('editItem',category_id=item.category_id,item_id=item.id) }}" method="POST">
@@ -30,5 +27,4 @@
 			</div>
 		</form>
 	</div>
-</body>
-</html>
+{% endblock %}

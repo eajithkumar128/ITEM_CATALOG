@@ -1,14 +1,10 @@
-<!DOCTYPE html>
-<html>
-<head>
-	<title>NEW CATEGORY</title>
-</head>
-<body>
+{% extends "main.html" %}
+{% block content %}
+{% include "header.html" %}
 	<h1>ADD NEW CATEGORY</h1>
 	<form action="{{url_for('addCategory')}}" method="POST">
 		<label for="Name">Name:</label>
 		<input type ="text" class="form-control" maxlength="100" minlength="2" name="name">
 		<button type="submit">Add New</button>
 	</form>
-</body>
-</html>
+{% endblock %}

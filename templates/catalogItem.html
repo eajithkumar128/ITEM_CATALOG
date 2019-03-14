@@ -1,10 +1,6 @@
-<!DOCTYPE html>
-<html lang="en" dir="ltr">
-  <head>
-    <meta charset="utf-8">
-    <title>CATEGORY ITEM</title>
-  </head>
-  <body>
+{% extends "main.html" %}
+{% block content %}
+{% include "header.html" %}
     <div>
       <h1>CATEGORIES</h1>
       {% for category in category %}
@@ -21,5 +17,4 @@
           <h3>No items in this category</h3>
       {% endif %}
     </div>
-  </body>
-</html>
+{% endblock %}
