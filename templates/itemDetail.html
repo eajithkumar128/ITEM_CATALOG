@@ -3,5 +3,7 @@
 {% include "header.html" %}
 	<h1>{{itemDetail.title}}</h1>
 	<p>{{itemDetail.Description}}</p>
-	<a href="{{url_for('editItem',category_id=itemDetail.category_id,item_id=itemDetail.id)}}">EDIT</a> | <a href="{{url_for('deleteItem',category_id=itemDetail.category_id,item_id=itemDetail.id)}}">DELETE</a>
+	{% if loggedIn %}
+		<a href="{{url_for('editItem',category_id=itemDetail.category_id,item_id=itemDetail.id)}}">EDIT</a> | <a href="{{url_for('deleteItem',category_id=itemDetail.category_id,item_id=itemDetail.id)}}">DELETE</a>
+	{% endif %}
 {% endblock %}
