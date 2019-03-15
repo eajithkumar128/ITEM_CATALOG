@@ -7,7 +7,7 @@
 
     <ul class="nav navbar-nav navbar-right">
       {% if username %}
-      <li><a href="{{url_for('gdisconnect')}}"><span class="glyphicon glyphicon-user"></span> {{username}}</a></li>
+      <li><a href="#"><span class="glyphicon glyphicon-user"></span> {{username}}</a></li>
       {% endif %}
       {% if loginId %}
 		    <li><a href="{{url_for('gdisconnect')}}"><span class="glyphicon glyphicon-log-in"></span> Logout</a></li>

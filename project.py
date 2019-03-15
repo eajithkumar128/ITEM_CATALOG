@@ -1,3 +1,13 @@
+#!/usr/bin/env python3
+
+'''
+    Author: Ajithkumar
+    Description: Application that provide the list of items within
+    varitey of category as well as provide a user registration and
+    authentication system.
+'''
+
+
 from flask import Flask, render_template, request, redirect, jsonify, url_for
 from flask import flash
 from sqlalchemy import create_engine, asc
@@ -26,6 +36,7 @@ CLIENT_ID = json.loads(
 APPLICATION_NAME = "ItemCatalog"
 
 
+# setting up the database
 engine = create_engine('sqlite:///itemcategoryDBs.db',
                        connect_args={'check_same_thread': False})
 Base.metadata.bind = engine
@@ -35,6 +46,7 @@ DBSession = sessionmaker(bind=engine)
 session = DBSession()
 
 
+# Login Route
 @app.route("/login")
 def loginRoute():
     state = ''.join(random.choice(string.ascii_uppercase + string.digits)
@@ -43,6 +55,7 @@ def loginRoute():
     return render_template('loginPage.html', STATE=state)
 
 
+# Google login Route
 @app.route('/gconnect', methods=['POST'])
 def gconnect():
     # Validate state token
@@ -138,10 +151,11 @@ def gconnect():
     return output
 
 
+# Google logout
 @app.route('/gdisconnect')
 def gdisconnect():
     access_token = login_session.get('access_token')
-    #check if the user is connected or not
+    # check if the user is connected or not
     if access_token is None:
         print('Access Token is None')
         response = make_response(
@@ -151,7 +165,7 @@ def gdisconnect():
     print('In gdisconnect access token is %s', access_token)
     print('User name is: ')
     print(login_session['access_token'])
-    #validating if the token if valid
+    # validating if the token if valid
     url = 'https://accounts.google.com/o/oauth2/revoke?token={}'.format(
         login_session['access_token'])
     h = httplib2.Http()
@@ -159,6 +173,7 @@ def gdisconnect():
     print('result is ')
     print(result)
     if result['status'] == '200':
+        # Deleting the session objects
         del login_session['access_token']
         del login_session['gplus_id']
         del login_session['username']
@@ -174,6 +189,7 @@ def gdisconnect():
         return response
 
 
+# Add new user to the database
 def createUser(login_session):
     newUser = User(name=login_session['username'], email=login_session[
                    'email'], picture=login_session['picture'])
@@ -183,11 +199,13 @@ def createUser(login_session):
     return user.id
 
 
+# return the user information for the user_id
 def getUserInfo(user_id):
     user = session.query(User).filter_by(id=user_id).one()
     return user
 
 
+# Return user_id for the email address
 def getUserID(email):
     try:
         user = session.query(User).filter_by(email=email).one()
@@ -196,6 +214,7 @@ def getUserID(email):
         return None
 
 
+# Returns the JSON format for the category and its items
 @app.route('/catalog/JSON/')
 def restaurantsJSON():
     categories = session.query(Category).options(
@@ -208,6 +227,7 @@ def restaurantsJSON():
                     i.serialize for i in c.items]) for c in categories])
 
 
+# Return the JSON format of items for particular category
 @app.route("/catalog/<int:category_id>/items/JSON")
 def categoryItemsJSON(category_id):
     categories = session.query(Category).filter_by(
@@ -220,6 +240,7 @@ def categoryItemsJSON(category_id):
                     i.serialize for i in c.items]) for c in categories])
 
 
+# Return JSON format of the specific item detail
 @app.route("/catalog/<int:category_id>/items/<int:item_id>/JSON")
 def itemDetailsJSON(category_id, item_id):
     item = session.query(Items).filter_by(id=item_id).one()
@@ -239,6 +260,7 @@ def homePage():
                            username=login_session['username'])
 
 
+# Return the item under specific category
 @app.route("/catalog/<int:category_id>/items")
 def catalogItems(category_id):
     categoryItems = session.query(Items).filter_by(
@@ -256,6 +278,7 @@ def catalogItems(category_id):
                            loginId=login_session['user_id'])
 
 
+# Route to create a new category
 @app.route("/catalog/new", methods=['GET', 'POST'])
 def addCategory():
     if not(login_session['username']):
@@ -274,11 +297,13 @@ def addCategory():
                                loginId=login_session['user_id'])
 
 
+# Route to edit a speicific category
 @app.route("/catalog/<int:category_id>/edit/", methods=['GET', 'POST'])
 def editCategory(category_id):
     if 'username' not in login_session:
         return redirect(url_for("loginRoute"))
     editedCategory = session.query(Category).filter_by(id=category_id).one()
+    # check if the user if valid to edit the category
     if login_session['user_id'] != editedCategory.user_id:
         return "YOU DON'T HAVE PERMISSION TO DELTE THE ITEM"
     if request.method == 'POST':
@@ -295,6 +320,7 @@ def editCategory(category_id):
                                loginId=login_session['user_id'])
 
 
+# Route to delete the specific category
 @app.route("/catalog/<int:category_id>/delete/", methods=['GET', 'POST'])
 def deleteCategory(category_id):
     if 'username' not in login_session:
@@ -318,6 +344,7 @@ def deleteCategory(category_id):
                                loginId=login_session['user_id'])
 
 
+# List the details of the specific item
 @app.route("/catalog/<int:category_id>/<int:item>/")
 def itemDetails(category_id, item):
     itemDetail = session.query(Items).filter_by(id=item).one()
@@ -331,6 +358,7 @@ def itemDetails(category_id, item):
                            loginId=login_session['user_id'])
 
 
+# Route to add new item to a category
 @app.route("/catalog/add/items", methods=['GET', 'POST'])
 def addItem():
     if not(login_session['username']):
@@ -357,6 +385,7 @@ def addItem():
                                loginId=login_session['user_id'])
 
 
+# Route to edit a specific item details
 @app.route(
     "/catalog/<int:category_id>/<int:item_id>/edit",
     methods=[
@@ -392,6 +421,7 @@ def editItem(category_id, item_id):
                                loginId=login_session['user_id'])
 
 
+# Route to delete a specific item
 @app.route(
     "/catalog/<int:category_id>/<int:item_id>/delete",
     methods=[
