@@ -15,12 +15,11 @@
 			<div class="form-group">
 				<label for="category">Category:</label>
 				<select name="category_id" class="form-control">
-					{% for category in category %}
-						{{category}}
-						{% if category.id == item.Category_id %}
-							<option selected value="{{category.id}}">{{category.name}}</option>
+					{% for catego in category %}
+						{% if catego.id == item.Category_id %}
+							<option selected value="{{catego.id}}">{{catego.name}}</option>
 						{% else %}
-							<option value="{{category.id}}">{{category.name}}</option>
+							<option value="{{catego.id}}">{{catego.name}}</option>
 						{% endif %}
 						}
 					{% endfor %}
