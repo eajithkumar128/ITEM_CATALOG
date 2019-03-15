@@ -1,9 +1,12 @@
 {% extends "main.html" %}
 {% block content %}
 {% include "header.html" %}
-	<h1>EDIT CATEGORY</h1>
+	<h3>EDIT CATEGORY</h3>
 	<form action="{{url_for('editCategory',category_id=category.id)}}" method="POST">
-		<input type="text" value="{{category.name}}" name="name" id="name" minlength="3">
-		<button type="submit">EDIT</button>
+		<div class="form-group">
+			<label for="name">Name:</label>
+			<input type="text" value="{{category.name}}" class="form-control" name="name" id="name" minlength="3">
+		</div>
+		<button type="submit" class="btn btn-primary">EDIT</button>
 	</form>
 {% endblock %}

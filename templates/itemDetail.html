@@ -1,9 +1,12 @@
 {% extends "main.html" %}
 {% block content %}
 {% include "header.html" %}
-	<h1>{{itemDetail.title}}</h1>
+	<h2>{{itemDetail.title.upper()}}</h2>
 	<p>{{itemDetail.Description}}</p>
 	{% if loggedIn %}
 		<a href="{{url_for('editItem',category_id=itemDetail.category_id,item_id=itemDetail.id)}}">EDIT</a> | <a href="{{url_for('deleteItem',category_id=itemDetail.category_id,item_id=itemDetail.id)}}">DELETE</a>
 	{% endif %}
+	<br><br>
+	<a href="{{url_for('catalogItems',category_id=itemDetail.category_id)}}" class="btn btn-info">&laquo; Previous</a>
+
 {% endblock %}

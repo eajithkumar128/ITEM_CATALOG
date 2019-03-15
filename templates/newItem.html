@@ -5,21 +5,23 @@
 		<h1>ADD NEW ITEM</h1>
 		<form action="{{ url_for('addItem') }}" method="POST">
 			<div class="form-group">
-				<label for="Title">Title:</label>
-				<input type ="text" class="form-control" maxlength="100" name="name">
-				<br><br>
-				<label for="Description">Description:</label>
-				<textarea name="description" id="descirption"></textarea>
-				<br><br>
-				<label for="category">Category:</label>
-				<select name="category_id">
+  			<label for="Title">Title:</label>
+  			<input type ="text" class="form-control" maxlength="100" name="name">
+			</div>
+			<div class="form-group">
+  			<label for="Description">Description:</label>
+  			<textarea class="form-control" rows="5" id="description" name="description"></textarea>
+			</div>
+			<div class="form-group">
+  			<label for="category">Category:</label>
+				<select name="category_id" class="form-control">
 					{% for category in category %}
 						<option value="{{category.id}}">{{category.name}}</option>
 					{% endfor %}
 				</select>
-				<br><br>
-				<button type="submit">Submit</button>
 			</div>
+
+			<button type="submit" class="btn btn-primary">Submit</button>
 		</form>
 	</div>
 {% endblock %}

@@ -6,25 +6,27 @@
 		<form action="{{ url_for('editItem',category_id=item.category_id,item_id=item.id) }}" method="POST">
 			<div class="form-group">
 				<label for="Title">Title:</label>
-				<input type ="text" class="form-control" maxlength="100" name="name" value={{item.title}}>
-				<br><br>
+				<input type ="text" class="form-control" maxlength="100" name="name" value="{{item.title}}">
+			</div>
+			<div class="form-group">
 				<label for="Description">Description:</label>
-				<textarea name="Description" id="descirption">{{ item.Description }}</textarea>
-				<br><br>
+				<textarea class="form-control" rows="5" id="Description" name="description">{{ item.Description }}</textarea>
+			</div>
+			<div class="form-group">
 				<label for="category">Category:</label>
-				<select name="category_name">
+				<select name="category_id" class="form-control">
 					{% for category in category %}
-						{% if category.name == item.Category_name%}
-							<option selected value="{{category.name}}">{{category.name}}</option>
+						{{category}}
+						{% if category.id == item.Category_id %}
+							<option selected value="{{category.id}}">{{category.name}}</option>
 						{% else %}
-							<option value="{{category.name}}">{{category.name}}</option>
+							<option value="{{category.id}}">{{category.name}}</option>
 						{% endif %}
 						}
 					{% endfor %}
 				</select>
-				<br><br>
-				<button type="submit">Edit Details</button>
 			</div>
+			<button type="submit" class="btn btn-primary">Submit</button>
 		</form>
 	</div>
 {% endblock %}

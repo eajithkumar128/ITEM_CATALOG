@@ -1,9 +1,9 @@
 {% extends "main.html" %}
 {% block content %}
 {% include "header.html" %}
-    <h1>ARE YOU SURE YOU WANT TO DELETE?</h1>
+    <h3>ARE YOU SURE YOU WANT TO DELETE?</h3>
     <form method="POST" action="{{url_for('deleteCategory',category_id=category.id)}}">
-      <button type="submit">YES</button>
-      <a href="{{url_for('homePage')}}">NO</a>
+      <button type="submit" class="btn btn-danger">YES</button>
+      <a href="{{url_for('homePage')}}" class="btn btn-info">NO</a>
     </form>
 {% endblock %}
