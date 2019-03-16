@@ -4,7 +4,7 @@
 	<h2>ADD NEW CATEGORY</h2>
 	<form action="{{url_for('addCategory')}}" method="POST">
 		<label for="Name">Name:</label>
-		<input type ="text" class="form-control" maxlength="100" minlength="2" name="name">
+		<input required type ="text" class="form-control" maxlength="100" minlength="2" name="name">
 		<br>
 		<button type="submit" class="btn btn-primary">Add New</button>
 		<a href="{{url_for('homePage')}}" class="btn btn-warning">Cancel</a>
