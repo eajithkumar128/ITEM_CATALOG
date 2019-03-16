@@ -51,4 +51,14 @@ $ python project.py
 ```
 
 Once after starting the server open a web browser and navigate to "http://localhost:5000"
+
+### JSON Endpoints
+THis project also supports the API to fetch the category and item details in JSON format.
+Visit the following URI to get the JSON data:
+
+'''sh
+JSON FORMAT FOR ALL THE CATEGORY AND ITEMS: /catalog/<int:category_id>/items/JSON
+JSON FORMAT FOR PARTICULAR CATEGORY: /catalog/<int:category_id>/items/JSON
+JSON FORMAT TO GET SPECIFC ITEM DETAIL: /catalog/<int:category_id>/items/<int:item_id>/JSON
+'''
     
